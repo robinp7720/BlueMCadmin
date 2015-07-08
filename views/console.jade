@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    .panel.panel-default
+        .panel-heading
+            h3.panel-title Console
+        .panel-body
+            .console
+        .panel-footer
+            form#command
+                .row
+                    .col-md-11.col-sm-10
+                        input.form-control.control#command-input
+                    .col-md-1.col-sm-2
+                        button.btn.btn-success.control#send-command(type="submit") Go

@@ -1,0 +1,92 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='description', content='')
+        meta(name='author', content='Robin Decker')
+        title BlueMCadmin
+        // Bootstrap Core CSS
+        link(href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css", rel="stylesheet")
+        link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", rel="stylesheet")
+        // MetisMenu CSS
+        link(href='#{url.base}stylesheets/metisMenu.min.css', rel='stylesheet')
+        // Timeline CSS
+        link(href='#{url.base}stylesheets/timeline.css', rel='stylesheet')
+        // Custom CSS
+        link(href='#{url.base}stylesheets/sb-admin-2.css', rel='stylesheet')
+        // Morris Charts CSS
+        link(href='#{url.base}stylesheets/morris.css', rel='stylesheet')
+    body
+        // Navigation
+        nav.navbar.navbar-default
+            .container-fluid
+                .navbar-header
+                    button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target="#main-nav")
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href="/") BlueMCadmin
+                .collapse.navbar-collapse#main-nav
+                    ul.nav.navbar-nav.navbar-right
+                        li: a(href="/logout") Logout
+
+
+        .container-fluid
+            .row
+                .col-md-2.col-lg-2
+
+                    ul.list-group.sidenav.title
+                        li.list-group-item General
+
+                    ul.list-group.sidenav
+                        li.list-group-item
+                            a(href="#{url.base}") Overview
+                        li.list-group-item
+                            a(href="#{url.base}usage") Usage
+
+                    ul.list-group.sidenav.title
+                        li.list-group-item Server Actions
+
+                    ul.list-group.sidenav
+                        li.list-group-item
+                            a(href="#{url.base}settings") Settings
+                        li.list-group-item
+                            a(href="#{url.base}console") Console
+                        li.list-group-item
+                            a(href="#{url.base}plugins") Plugins
+                        li.list-group-item
+                            a(href="#{url.base}plugins/browse") Browse Plugins
+
+                    ul.list-group.sidenav
+                        li.list-group-item
+                            a(href="#{url.base}panel/settings") Panel settings
+
+
+                .col-md-10.col-lg-10
+                    .row
+                        .col-lg-12
+                            h1.page-header #{page}
+                    block content
+    // jQuery
+    script(src='//code.jquery.com/jquery-2.1.4.min.js')
+    // Bootstrap Core JavaScript
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+    // Metis Menu Plugin JavaScript
+    script(src='#{url.base}javascripts/metisMenu.min.js')
+    // Morris Charts JavaScript
+    script(src='#{url.base}javascripts/raphael-min.js')
+    script(src='#{url.base}javascripts/morris.min.js')
+    script(src='#{url.base}javascripts/morris-data.js')
+    // Custom Theme JavaScript
+    script(src='#{url.base}javascripts/sb-admin-2.js')
+    script(src='#{url.base}javascripts/server-control.js')
+
+    // Setup socket.io
+    script(src='https://cdn.socket.io/socket.io-1.2.0.js')
+
+    script(src='#{url.base}javascripts/live-data.js')
+
+
