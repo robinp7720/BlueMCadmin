@@ -1,0 +1,25 @@
+{
+  "name": "BlueMCadmin",
+  "version": "0.0.1",
+  "homepage": "https://github.com/robinp7720/BlueMCadmin",
+  "authors": [
+    "robinp7720 <robin@decker.cx>"
+  ],
+  "keywords": [
+    "blue"
+  ],
+  "license": "GPL V3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootbox": "~4.4.0",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}

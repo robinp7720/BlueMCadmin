@@ -13,7 +13,7 @@ var config = {
         password: "admin"
     },
     url: {
-        base: 'http://localhost:3000/'
+        base: 'http://192.168.1.98:3000/'
     }
 };
 module.exports = config;

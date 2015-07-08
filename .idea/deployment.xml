@@ -10,6 +10,7 @@
           <excludedPaths>
             <excludedPath path="/node_modules" />
             <excludedPath path="/bin/minecraft-server" />
+            <excludedPath path="/bin/config.js" />
           </excludedPaths>
         </serverdata>
       </paths>

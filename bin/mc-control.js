@@ -29,12 +29,14 @@ function setupMcServer() {
     mcServerProc.on('exit', function() {
         console.log("Server stopped");
         mcServerProc = undefined;
+        eventEmitter.emit('serverStop');
     });
     /* Auto Save */
     setInterval(function() {
         Minecraftserver.save();
+        eventEmitter.emit('autoSave');
     }, save_interval);
-    eventEmitter.emit('onSpawn');
+    eventEmitter.emit('spawn');
 }
 
 function spawnSrv(max, min, path) {
@@ -51,7 +53,11 @@ function spawnSrv(max, min, path) {
     setupMcServer();
 }
 Minecraftserver.onSpawn = function(cb) {
-    eventEmitter.on('onSpawn', cb);
+    eventEmitter.on('spawn', cb);
+};
+
+Minecraftserver.on = function(event, callback) {
+    eventEmitter.on(event, callback);
 };
 
 Minecraftserver.running = function() {

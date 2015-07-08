@@ -48,21 +48,41 @@ io.on('connection', function(socket){
             delete socket.handshake.session.userdata;
         }
     });
+    /* Kill connection if not authenticated */
     if (socket.handshake.session.auth !== true){
         socket.disconnect();
-        console.log("Unauthenticated user connected");
     }else {
-        console.log('Authenticated user connected');
+        /* Setup socket events */
         socket.on('command',function(msg){
             mcServ.sendCmd(msg);
+        });
+        socket.on('server-status',function(msg){
+            if (msg == 999){
+                if (mcServ.running()){
+                    io.emit('server-status', 100);
+                }else{
+                    io.emit('server-status', 101);
+                }
+            }
         });
 
     }
 });
-
+/* Server status codes
+100: server start
+101: server stop
+102: server auto-save
+ */
 mcServ.onSpawn(function(){
+    io.emit('server-status', 100);
     mcServ.onLog(function (data) {
         io.emit('console', data.toString());
+    });
+    mcServ.on("serverStop", function(){
+        io.emit('server-status', 101);
+    });
+    mcServ.on("autoSave", function(){
+        io.emit('server-status', 102);
     });
 });
 
@@ -90,21 +110,20 @@ app.get('/logout',function(req,res,next){
 });
 
 app.use('/', routes);
-app.use('/actions', actions);
+app.use('/actions/server', actions);
 app.use('/actions/plugins', pluginActions);
 app.use('/status', status);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
 // error handlers
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
 // development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -116,7 +135,6 @@ if (app.get('env') === 'development') {
 }
 
 // production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
