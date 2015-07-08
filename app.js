@@ -20,12 +20,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var actions = require('./routes/actions');
+var actions = require('./routes/actions/server');
+var pluginActions = require('./routes/actions/plugins');
 var status = require('./routes/status');
 
 var mcServ = require('./bin/mc-control.js');
-
-console.log(mcServ.getPlugins());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -92,6 +91,7 @@ app.get('/logout',function(req,res,next){
 
 app.use('/', routes);
 app.use('/actions', actions);
+app.use('/actions/plugins', pluginActions);
 app.use('/status', status);
 
 // catch 404 and forward to error handler

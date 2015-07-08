@@ -6,6 +6,7 @@ var fs = require("fs");
 var eventEmitter = new events.EventEmitter();
 
 var Minecraftserver = {};
+Minecraftserver.plugins = {};
 
 var save_interval = 1000 * 60 * 30;
 
@@ -77,7 +78,7 @@ Minecraftserver.sendCmd = function(cmd) {
     mcServerProc.stdin.write(cmd + '\n');
 };
 
-Minecraftserver.getPlugins = function() {
+Minecraftserver.plugins.list = function() {
     var files = fs.readdirSync(serverCwd + "plugins/");
     var plugins = [];
     for (var i = 0; i < files.length; i++) {
@@ -90,6 +91,12 @@ Minecraftserver.getPlugins = function() {
         }
     }
     return plugins;
+};
+
+Minecraftserver.plugins.uninstall = function(plugin) {
+    plugin = plugin.replace("/","");
+    fs.unlink(serverCwd + "plugins/"+plugin);
+    return true;
 };
 
 Minecraftserver.save = function() {

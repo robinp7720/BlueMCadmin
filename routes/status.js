@@ -21,7 +21,7 @@ router.get('/server/running/', function(req, res, next) {
     res.send(mcServ.running());
 });
 router.get('/server/plugins/', function(req, res, next) {
-    res.send(mcServ.getPlugins());
+    res.send(mcServ.plugins.list());
 });
 
 module.exports = router;
