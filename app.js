@@ -54,11 +54,11 @@ io.on('connection', function(socket){
     }else {
         /* Setup socket events */
         socket.on('command',function(msg){
-            mcServ.sendCmd(msg);
+            mcServ.server.cmd(msg);
         });
         socket.on('server-status',function(msg){
             if (msg == 999){
-                if (mcServ.running()){
+                if (mcServ.server.running()){
                     io.emit('server-status', 100);
                 }else{
                     io.emit('server-status', 101);
@@ -71,18 +71,14 @@ io.on('connection', function(socket){
 /* Server status codes
 100: server start
 101: server stop
-102: server auto-save
  */
-mcServ.onSpawn(function(){
+mcServ.server.on('server.start',function(){
     io.emit('server-status', 100);
-    mcServ.onLog(function (data) {
+    mcServ.server.onLog(function (data) {
         io.emit('console', data.toString());
     });
-    mcServ.on("serverStop", function(){
+    mcServ.server.on("server.stop", function(){
         io.emit('server-status', 101);
-    });
-    mcServ.on("autoSave", function(){
-        io.emit('server-status', 102);
     });
 });
 

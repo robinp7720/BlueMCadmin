@@ -26,19 +26,19 @@ router.use(function (req, res, next) {
   }
 });
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', {page: 'Home' });
-});
-
 /* GET login page. */
 router.get('/login', function(req, res, next) {
   res.render('login', {page: 'Login' });
 });
 
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', {page: 'Home' });
+});
+
 /* GET console page. */
 router.get('/console', function(req, res, next) {
-  res.render('console', {page: 'Server Console' });
+  res.render('server-actions/console', {page: 'Server Console' });
 });
 
 /* Plugin pages */
